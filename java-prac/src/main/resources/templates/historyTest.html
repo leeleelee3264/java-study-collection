@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>뒤로 가봅시다</h1>
+    <button id="btn-history">history click</button>
+    <button id="btn-document">document click</button>
+</body>
+<script>
+    document.getElementById('btn-document').addEventListener('click', () => {
+        console.log(window.history)
+        // window.location.href = window.history.back()
+    });
+
+    document.getElementById('btn-history').addEventListener('click', () => {
+        console.log(document.referrer)
+        // window.location.href = document.referrer
+    });
+</script>
+</html>
