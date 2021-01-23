@@ -1,7 +1,9 @@
 package com.example.demo.tempInf.BeanValid;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -14,8 +16,9 @@ import java.util.List;
  * date 2021-01-23
  * description
  */
-@Builder
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class MessageDTO {
 
     @Min(1)
@@ -30,6 +33,5 @@ public class MessageDTO {
     @NotNull(message = "messahe는 비어있을 수 업습니다")
     private String message;
 
-    private List<Integer> target;
 
 }
