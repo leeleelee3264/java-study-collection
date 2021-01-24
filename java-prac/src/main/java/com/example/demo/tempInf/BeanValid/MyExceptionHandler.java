@@ -1,9 +1,12 @@
 package com.example.demo.tempInf.BeanValid;
 
+import com.example.demo.Controller.ApiController;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 /**
  * @author SeungminLee
@@ -12,11 +15,12 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
  * description
  */
 @Slf4j
-public class BeanValidExceptionHandler {
+@ControllerAdvice
+public class MyExceptionHandler {
 
-    @org.springframework.web.bind.annotation.ExceptionHandler(MethodArgumentNotValidException.class)
-    public Object handleBeanValid(MethodArgumentNotValidException e) {
-
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity handleBeanValid(MethodArgumentNotValidException e) {
+        log.error("잡힘");
         String errorMsg = e.getBindingResult()
                 .getAllErrors()
                 .get(0)

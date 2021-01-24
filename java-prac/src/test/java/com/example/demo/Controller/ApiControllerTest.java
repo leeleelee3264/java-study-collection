@@ -26,7 +26,7 @@ public class ApiControllerTest extends ControllerTestFrame {
     @Test
     public void beanValid() throws Exception {
 
-        MessageDTO user = new MessageDTO(1, "rr", "434", "r3r3r");
+        MessageDTO user = new MessageDTO(1, "", "434", "r3r3r");
 
         mockMvc.perform(post("/api/bean/valid")
             .contentType(MediaType.APPLICATION_JSON)

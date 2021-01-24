@@ -1,23 +1,18 @@
 package com.example.demo.Controller;
 
+import com.example.demo.tempInf.BeanValid.MyExceptionHandler;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
 import java.nio.charset.StandardCharsets;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 /**
@@ -45,6 +40,8 @@ public abstract class ControllerTestFrame {
     @BeforeEach
     private void setup() {
         mockMvc = MockMvcBuilders.standaloneSetup(controller())
+                // to bind exception with mockMvc
+                .setControllerAdvice(new MyExceptionHandler())
                 .addFilter(new CharacterEncodingFilter(StandardCharsets.UTF_8.name(), true))
                 .alwaysDo(print())
                 .build();
