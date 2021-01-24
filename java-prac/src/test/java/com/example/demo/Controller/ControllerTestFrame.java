@@ -19,15 +19,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
  * @author SeungminLee
  * project java_toy_project
  * date 2021-01-23
- * description
+ * description: MockMvc 를 이용하면 서버를 띄우지 않고 mvc 형태의 테스트를 진행 할 수 있다. controller - service - dao 다 불러내는 형태인듯
+ * 그래서 사실 unit 테스트라고 볼 수 없다.
  */
 @SpringBootTest
 @AutoConfigureMockMvc
 public abstract class ControllerTestFrame {
 
-    // MockMvc 를 이용하면 서버를 띄우지 않고 mvc 형태의 테스트를 진행 할 수 있다. controller - service - dao 다 불러내는 형태인듯
-    @Autowired
-    protected MockMvc mockMvc;
+    protected MockMvc jsonMock;
 
     @Autowired
     protected ObjectMapper objectMapper;
@@ -40,12 +39,13 @@ public abstract class ControllerTestFrame {
 
     @BeforeEach
     private void setup() {
-        mockMvc = MockMvcBuilders.standaloneSetup(controller())
+        jsonMock = MockMvcBuilders.standaloneSetup(controller())
                 // to bind exception with mockMvc
                 .setControllerAdvice(new MyExceptionHandler())
                 .addFilter(new CharacterEncodingFilter(StandardCharsets.UTF_8.name(), true))
                 .alwaysDo(print())
                 .build();
+
     }
 
 }

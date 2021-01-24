@@ -27,6 +27,6 @@ public class MyExceptionHandler {
 
         log.error(errorMsg);
 
-        return new ResponseEntity<>("Your request is caught by bean valid exception handler!", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(errorMsg, HttpStatus.BAD_REQUEST);
     }
 }

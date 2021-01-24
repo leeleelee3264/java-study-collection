@@ -49,4 +49,13 @@ public class ApiController {
         model.addAttribute("userList", users);
         return "mockTest";
     }
+
+    @PostMapping("/jpa/save")
+    @ResponseBody
+    public ResponseEntity saveByJpa(
+        @Valid @RequestBody UsersVO usersVO
+    ) {
+        UsersVO result = usersService.save(usersVO);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 }
