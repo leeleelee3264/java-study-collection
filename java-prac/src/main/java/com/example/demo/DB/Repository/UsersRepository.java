@@ -23,7 +23,7 @@ public interface UsersRepository extends JpaRepository<UsersVO, Long> {
     List<UsersVO> findByNameLike(String name);
 
     /**
-     * jpa update 는 분명 모든 것을 한 큐에 업데이트 하는 그런.. 성격인가봄 
+     * jpa update 는 분명 모든 것을 한 큐에 업데이트 하는 그런.. 성격인가봄
      * @param id
      * @param name
      */

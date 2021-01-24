@@ -19,11 +19,8 @@ import java.util.List;
 @Service
 public class UsersService {
 
-    private final UsersRepository usersRepository;
-
-    public UsersService(UsersRepository usersRepository) {
-        this.usersRepository = usersRepository;
-    }
+    @Autowired
+    private UsersRepository usersRepository;
 
     public List<UsersVO> findByName(String name) {
         try {

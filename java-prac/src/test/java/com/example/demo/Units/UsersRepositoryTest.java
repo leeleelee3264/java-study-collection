@@ -10,7 +10,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author SeungminLee
  * project java_toy_project
  * date 2021-01-24
- * description
+ * description: Repository unit test
  */
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
@@ -57,8 +59,10 @@ public class UsersRepositoryTest {
         long id = 2;
         String name = "Jamie";
         String notName = "rer";
-//        entityManager.persist(id);
-//        entityManager.persist(name);
+
+        // entityManager 은 진짜 jpa 에 있는 entity 를 위한거다.
+        // jpa entity 가 아니면 못 쓴다는 소리임임
+//       entityManager.persist(id);
 //        entityManager.flush();;
 
         usersRepository.updateName(id, name);
