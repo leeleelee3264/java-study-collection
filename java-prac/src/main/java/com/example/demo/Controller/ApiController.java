@@ -1,13 +1,18 @@
 package com.example.demo.Controller;
 
+import com.example.demo.DB.DAO.UsersVO;
+import com.example.demo.Service.UsersService;
 import com.example.demo.tempInf.BeanValid.MessageDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 /**
@@ -21,10 +26,27 @@ import javax.validation.Valid;
 @RequestMapping("/api")
 public class ApiController {
 
+    private final UsersService usersService;
+
+    public ApiController(UsersService usersService) {
+        this.usersService = usersService;
+    }
+
     @PostMapping("/bean/valid")
     @ResponseBody
     public ResponseEntity beanValid(@Valid @RequestBody MessageDTO messageDTO) {
         String value = messageDTO.getMessage();
         return new ResponseEntity<>("Your request is accepted!", HttpStatus.OK);
+    }
+
+    @GetMapping("/jpa/get")
+    public String getByJpa(
+            @RequestParam @Nullable String name,
+            Model model
+    ) {
+        List<UsersVO> users =  usersService.findByName(name);
+
+        model.addAttribute("userList", users);
+        return "mockTest";
     }
 }

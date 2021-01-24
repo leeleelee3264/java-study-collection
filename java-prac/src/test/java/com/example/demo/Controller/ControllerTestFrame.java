@@ -25,6 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 @AutoConfigureMockMvc
 public abstract class ControllerTestFrame {
 
+    // MockMvc 를 이용하면 서버를 띄우지 않고 mvc 형태의 테스트를 진행 할 수 있다. controller - service - dao 다 불러내는 형태인듯
     @Autowired
     protected MockMvc mockMvc;
 
