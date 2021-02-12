@@ -2,8 +2,7 @@ package com.example.demo.Units;
 
 import com.example.demo.Controller.ApiController;
 import com.example.demo.DB.DAO.UsersVO;
-import com.example.demo.Service.UsersService;
-import com.example.demo.tempInf.BeanValid.MessageDTO;
+import com.example.demo.Service.UsersServiceImp;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -14,17 +13,12 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
-import java.util.Collections;
-
-import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
  * @author SeungminLee
@@ -44,7 +38,7 @@ class ApiControllerTest {
     private MockMvc mvc;
 
     @MockBean
-    private UsersService usersService;
+    private UsersServiceImp usersServiceImp;
 
     @Autowired
     protected ObjectMapper objectMapper;
@@ -61,13 +55,12 @@ class ApiControllerTest {
                 .salary(1000)
                 .build();
 
-        given(usersService.save(dummy)).willReturn(dummy);
+        given(usersServiceImp.save(dummy)).willReturn(dummy);
 
         mvc.perform(post("/api/jpa/save")
                 .content(asJsonString(dummy))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-//                .andExpect(jsonPath("$", hasSize(3)));
                 .andExpect(jsonPath("$.name", is(dummy.getName())));
 
     }

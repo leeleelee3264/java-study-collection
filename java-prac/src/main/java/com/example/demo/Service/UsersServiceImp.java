@@ -2,6 +2,7 @@ package com.example.demo.Service;
 
 import com.example.demo.DB.DAO.UsersVO;
 import com.example.demo.DB.Repository.UsersRepository;
+import com.example.demo.Service.frame.UsersService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,11 +18,12 @@ import java.util.List;
  */
 @Slf4j
 @Service
-public class UsersService {
+public class UsersServiceImp implements UsersService {
 
     @Autowired
     private UsersRepository usersRepository;
 
+    @Override
     public List<UsersVO> findByName(String name) {
         try {
             return usersRepository.findByName(name);
@@ -31,6 +33,7 @@ public class UsersService {
         }
     }
 
+    @Override
     public List<UsersVO> findByNameLike(String name) {
         try {
             return usersRepository.findByNameLike(name);
@@ -40,6 +43,7 @@ public class UsersService {
         }
     }
 
+    @Override
     public UsersVO save(UsersVO vo) {
         usersRepository.save(vo);
         return vo;

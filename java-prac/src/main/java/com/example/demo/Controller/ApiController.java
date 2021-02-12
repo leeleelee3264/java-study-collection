@@ -1,7 +1,7 @@
 package com.example.demo.Controller;
 
 import com.example.demo.DB.DAO.UsersVO;
-import com.example.demo.Service.UsersService;
+import com.example.demo.Service.UsersServiceImp;
 import com.example.demo.tempInf.BeanValid.MessageDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -26,10 +26,10 @@ import java.util.List;
 @RequestMapping("/api")
 public class ApiController {
 
-    private final UsersService usersService;
+    private final UsersServiceImp usersServiceImp;
 
-    public ApiController(UsersService usersService) {
-        this.usersService = usersService;
+    public ApiController(UsersServiceImp usersServiceImp) {
+        this.usersServiceImp = usersServiceImp;
     }
 
     @PostMapping("/bean/valid")
@@ -44,7 +44,7 @@ public class ApiController {
             @RequestParam @Nullable String name,
             Model model
     ) {
-        List<UsersVO> users =  usersService.findByName(name);
+        List<UsersVO> users =  usersServiceImp.findByName(name);
 
         model.addAttribute("userList", users);
         return "mockTest";
@@ -55,7 +55,7 @@ public class ApiController {
     public ResponseEntity saveByJpa(
         @Valid @RequestBody UsersVO usersVO
     ) {
-        UsersVO result = usersService.save(usersVO);
+        UsersVO result = usersServiceImp.save(usersVO);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }
