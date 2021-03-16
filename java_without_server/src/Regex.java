@@ -1,3 +1,5 @@
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -8,6 +10,18 @@ import java.util.regex.Pattern;
  * description
  */
 public class Regex {
+
+
+
+
+    public static void testNumber(String src) {
+
+        Pattern SRC_PHONE_FORMAT =  Pattern.compile("(\\d{3})(\\d{4})(\\d{4})");
+        Pattern DEST_PHONE_FORMAT = Pattern.compile("$1-$2-$3");
+
+        String dest = src.replaceFirst(SRC_PHONE_FORMAT.toString(), DEST_PHONE_FORMAT.toString());
+        System.out.println(dest);
+    }
 
     public static void testFind(String src) {
         Pattern pattern = Pattern.compile("([^,]*):([^,]*):([^,]*)");
@@ -37,5 +51,8 @@ public class Regex {
 
         String src2 = "I (Love) you";
         extractBetween(src2);
+
+        String phone = "01012344444";
+        testNumber(phone);
     }
 }
