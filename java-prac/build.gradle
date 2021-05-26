@@ -15,35 +15,37 @@ configurations {
 }
 
 repositories {
-    mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'me.leeleelee3264:leeleelee3264-spring-boot-starter'
+
+//    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+//    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    runtimeOnly 'mysql:mysql-connector-java'
-    annotationProcessor 'org.projectlombok:lombok'
-
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-    }
-
-    // added
-    compile group: 'org.springframework', name: 'spring-aop'
-    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.0'
-
-    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop'
-
-    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-validation'
-
-// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
+//    compileOnly 'org.projectlombok:lombok'
+//    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+//    runtimeOnly 'mysql:mysql-connector-java'
+//    annotationProcessor 'org.projectlombok:lombok'
+//
+//    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+//        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+//    }
+//
+//    // added
+//    compile group: 'org.springframework', name: 'spring-aop'
+//    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+//    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.0'
+//
+//    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop
+//    compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop'
+//
+//    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
+//    compile group: 'org.springframework.boot', name: 'spring-boot-starter-validation'
+//
+//// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa
+//    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
 
 }
 
