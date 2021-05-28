@@ -44,15 +44,31 @@ public class Regex {
         }
     }
 
+    public static String removeWhiteSpace(String src) {
+        return src.replaceAll("\\s", "");
+    }
+
+
     public static void main(String[] args) {
 
 //        String src = "A:COME_IN:T";
 //        testFind(src);
 
-        String src2 = "I (Love) you";
-        extractBetween(src2);
+//        String src2 = "I (Love) you";
+//        extractBetween(src2);
+//
+//        String phone = "01012344444";
+//        testNumber(phone);
 
-        String phone = "01012344444";
-        testNumber(phone);
+        String src3 = "이름에 공백이 웬말";
+        System.out.println(removeWhiteSpace(src3));
+
+
+        String src5 = " Seungmin Lee ";
+        System.out.println(src5.trim());
+
+        String src4 = null;
+        System.out.println(src4.trim());
+
     }
 }

@@ -1,22 +1,8 @@
 package me.leelee3264.springbootgettingstarted;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import me.leelee3264.springbootgettingstarted.listener.BeforeListener;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
-import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 
 // 루트에 안 두고 사용할 패키지의 최상단 (디폴트)에 어노테이션을 썼다
 // 왜냐하면 componentScan 때문이다.
@@ -26,7 +12,23 @@ import org.springframework.web.bind.annotation.RestController;
 public class SpringBootGettingStartedApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringBootGettingStartedApplication.class, args);
+
+//        이렇게 그냥 런을 갈겨버리면 스프링어플리케이션을 마음대로 커스텀을 못한다. 그냥 있는 그대로를 쓰는 것
+//        SpringApplication.run(SpringBootGettingStartedApplication.class, args);
+
+//
+//        editconfiguration (내가 맨날 조정하는 실행옵션 그거) vm 옵션에서 -Ddebug 써주면 디버그모드가 되는데
+//                스프링자체의 디버그모드인지 내가 원래 디버그버튼 눌러서 디버깅을 할 때보다 더 상세한 정보들이 올라온다.
+//                스프링 자체에 대한 디버깅 인포가 올라오는 것 같다. 뭐가 매핑이 되고 뭔 라이브러리 불러오고 등등 (원래는 기본 로깅은 인포까지라고 한다)
+
+//        SpringApplication application = new SpringApplication(SpringBootGettingStartedApplication.class);
+//        application.run(args);
+
+//        이렇게 빌더 패턴으로도 만들 수 있다.
+        new SpringApplicationBuilder()
+                .sources(SpringBootGettingStartedApplication.class)
+                .listeners(new BeforeListener())
+                .run(args);
     }
 
 //    @Bean
@@ -162,3 +164,22 @@ public class SpringBootGettingStartedApplication {
 //boot도 거기까지 동일하게 하고 뒤를 추가한 것
 //Manifest에서 Main-class를 그냥 main class 안 쓰고 런처를 써놨다. 어차피 런처가 main 찾아올 테니까
 //그리고 그 뒤에 start-class라고 내가 만든 main class를 표기해놨음
+
+
+//------------------------------------------ application event listener
+//어플리케이션이 이벤트가 생길때마다 실행해주는 리스너. POJO에서 컴포넌트 어떻게 우회해서 쓸까 고민했을떄 찾아봤던 그 리스너 맞음
+//        리스너를 만들고 컴포넌트로 등록을 한다. 한마디로 빈이라는 말이다.
+//근데 어플리케이션이 다 뜨고 실행되는 이벤트들은 상관이 없는데 어플리케이션이 뜰때나 그 이전의 이벤트는 어쩜?
+//왜냐하면 어플리케이션의 스프링 컨테이너가 빈을 관리하기 때문에 불러오고 그러는 건데 어플리케이션이 들 떠서 빈을 관리도 못하는 그
+//시점에 빈으로 등록된 이벤트를 실행하려고 하는거니까...
+//이때는 어플리케이션에 직접 addListener써서 리스너 객체를 넘겨줘서 실행시킨다 (어플리케이션이 모르니 아에 새겨버리는 수준...)
+//    그래서 어차피 객체를 만들어줘서 넘겼기 때문에 컴포넌트 어노가 크게 의미가 없음 뺴주세요
+
+//WebApplicationType.NONE
+//        WebApplicationType.SERVLET
+//        WebApplicationType.REACTIVE
+//스프링 mvc가 있으면 서블릿 타입으로 돌고 스프링 플럭스가 있으면 리액티브 타입으로 돈다. 둘 다 있으면 서블릿으로 돈다.
+//리액티브로 돌리고 싶으면          WebApplicationType.REACTIVE 직접 써줘야 된다
+
+//아규먼트
+//vm option에 -D 로 시작해서 넘기면 vm 옵션이고 프로그램 아규먼트 항목에 -- 로 시작해서 넘기면 아규먼트임
