@@ -183,3 +183,20 @@ public class SpringBootGettingStartedApplication {
 
 //아규먼트
 //vm option에 -D 로 시작해서 넘기면 vm 옵션이고 프로그램 아규먼트 항목에 -- 로 시작해서 넘기면 아규먼트임
+//
+//properties 우선순위
+//        15. 파일에다가 직접 작성한 것 (순위가 많이 낮은 편)
+//4. 커맨드 라인에서 직접 넘겨주기
+//3. SpringbootTest어노에 properties라고 attr주기
+//2. 테스트에서 testpropertySource 어노 사용하기 (properties도 되고 location으로 파일 지정도 됨)
+//
+//properties에서 ${random.*} 이라고 내장된 랜덤 생성도 사용 가능
+
+//테스트하면서 리소스 쓰는 중 신기한 부분
+//보통 테스트를 컴파일 하면 소스를 먼저 빌드하고 테스트 디렉토리에 있는 소스를 빌드를 한다.
+//그래서 그냥 단순하게 프로퍼티를 본소스에 하나, 테스트에 하나 만들면 오버라이딩이 안된다. 그냥 본소스에 있는 걸 덮어써버리기 때문에
+//만약 본소스에서 본소스 프로퍼티에만 있는 프로를 썼으면 테스트 돌릴때 서버가 안 뜨는 에러가 생긴다. 결국 테스트용 프로퍼티도 본소스에 쓰고있는 인자들을 다 생성해줘야 에러 안 생기고 테스트가 돌아감
+//프로퍼티 오버라이딩은 같은 디렉토리 안에 있는 프로퍼티들끼리 가능한 것 같음. 테스트에 application.properties를 만들고 test.properties를 만들면
+//test.properties가 application.properties에 있는 설정들을 오버라이딩해서 사용하네. 근데 본소스에 있는 application.properties를 오버라이딩 해오지는 않음
+//SpringBootTest에 attr로 properties를 줘도 되고 TestPropertySource를 사용해도 된다. 이걸 어디가 쓸까 싶었는데
+//activeprofile 잡고 세부로 값 하나씩 바꿔주고 싶을 떄 쓰겠네

@@ -1,4 +1,4 @@
-package me.leelee3264.springbootgettingstarted.component;
+package me.leelee3264.springbootgettingstarted.runner;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -16,8 +16,8 @@ public class RunnerWIthApplicationRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        System.out.println("=============== First Runner run =================");
-        System.out.println("VM FOO: " + args.containsOption("foo"));
-        System.out.println("ARGS BAR: " + args.containsOption("bar"));
+//        System.out.println("=============== First Runner run =================");
+//        System.out.println("VM FOO: " + args.containsOption("foo"));
+//        System.out.println("ARGS BAR: " + args.containsOption("bar"));
     }
 }
