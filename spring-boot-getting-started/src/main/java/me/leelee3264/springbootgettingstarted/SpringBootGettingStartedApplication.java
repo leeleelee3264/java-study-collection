@@ -1,8 +1,11 @@
 package me.leelee3264.springbootgettingstarted;
 
+import me.leelee3264.springbootgettingstarted.component.MyProperties;
 import me.leelee3264.springbootgettingstarted.listener.BeforeListener;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 // 루트에 안 두고 사용할 패키지의 최상단 (디폴트)에 어노테이션을 썼다
 // 왜냐하면 componentScan 때문이다.
@@ -184,7 +187,9 @@ public class SpringBootGettingStartedApplication {
 //아규먼트
 //vm option에 -D 로 시작해서 넘기면 vm 옵션이고 프로그램 아규먼트 항목에 -- 로 시작해서 넘기면 아규먼트임
 //
-//properties 우선순위
+
+
+//----------------------------------properties 우선순위
 //        15. 파일에다가 직접 작성한 것 (순위가 많이 낮은 편)
 //4. 커맨드 라인에서 직접 넘겨주기
 //3. SpringbootTest어노에 properties라고 attr주기
@@ -200,3 +205,24 @@ public class SpringBootGettingStartedApplication {
 //test.properties가 application.properties에 있는 설정들을 오버라이딩해서 사용하네. 근데 본소스에 있는 application.properties를 오버라이딩 해오지는 않음
 //SpringBootTest에 attr로 properties를 줘도 되고 TestPropertySource를 사용해도 된다. 이걸 어디가 쓸까 싶었는데
 //activeprofile 잡고 세부로 값 하나씩 바꿔주고 싶을 떄 쓰겠네
+//아 지금 생각해보니까 본소스에 어플리케이션 프로퍼티 만들고 테스트에는 그 이름 말고 다른 이름의 프로퍼티 파일
+//만들면 컴파일 할 때 본소스 컴파일하고 테스트 컴파일 할 때 어플리케이션 프로퍼티를 안 덮어쓰니까 본소스에만 있는 프로퍼티있어도 오류가 안 나겠다
+
+//프로퍼티즈를 프로젝트 여러 위치에 만들 수 있는데 만드는 위치에 따라서도 우선순위가 달라진다. 우선순위 높은 애가 낮은 애걸 덮어씀
+//1. root/config (file)
+//2. root
+//3. classpath (내가 맨날 두는 거기)
+
+
+//properties as bean
+//비슷한 성격들의 프로퍼티를 앞에 같은 prefix로 계속 만들어야 한다면(my.name, my.age) 해당 Properties를 빈으로 만들어서 쓰는 방법이 있음
+//클래스 하나 만들고 @ConfigurationProperties("my") 이런식으로 써주면 된다. 근데 컴포넌트 어노테이션 써서 빈으로 만들어줘야지 안그럼 스프링에서 못
+//찾는다고 하나 하나 써달라고 @EnableConfigurationProperties(MyProperties.class) 이렇게 해달라고함 (auto configure은 이런식으로 되어있었던듯)
+//
+//이렇게 하면 장점
+//1. 문자열로 되어있는 타입세이프 하지 않은 프로퍼티들이 클래스 필드에 맞춰 들어가서 타입 세이프해짐
+//2. Value 에노 쓸때도 이름 굉장히 정확히 입력해야 하고 지저분한데 얘는 클래스 하나로 깔끔하게 관리가 된다
+//3. 프로퍼티 카멜,스네일, 언더스코어 다 되어서 어떤 형태로든 이름만 제대로 쓰면 맵핑이 된다
+//4. validated (hibernated 구현체) 써서 값을 검증을 할 수 있음 (이거 내 controller에서 값검증할때 써도 될듯..)
+
+
