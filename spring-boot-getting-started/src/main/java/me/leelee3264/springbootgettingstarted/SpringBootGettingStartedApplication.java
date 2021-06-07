@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Profile;
 
 // 루트에 안 두고 사용할 패키지의 최상단 (디폴트)에 어노테이션을 썼다
 // 왜냐하면 componentScan 때문이다.
@@ -226,3 +227,10 @@ public class SpringBootGettingStartedApplication {
 //4. validated (hibernated 구현체) 써서 값을 검증을 할 수 있음 (이거 내 controller에서 값검증할때 써도 될듯..)
 
 
+//#----------------프로파일
+//configuration이나 component에 @Profile 어노테이션을 둬서 서버 올릴때 올라올 빈과 올라오지 말아야 할 빈을 관리할 수 있다.
+
+//#------------------로깅
+//스프링은 아무튼 SLF4J (심플 로그 파사드 for 자바) 를 쓰고 실제 로그 구현체는 logback을 쓴다고 한다
+//원래는 Commons Loggings 이라는 로그 파사드가 있다는데 문제가 많아서 안 쓰는 레거시라고.
+//로그 파사드는 한마디로 로그 인터페이스들임. 인터페이스를 쓰는 장점인 구현체를 골라 쓸 수 있는 편리함. 그래서 로그 파사드를 쓰면 로거 구현체를 선택할 수 있는데 어차피 로그백 쓴다고 한다.
