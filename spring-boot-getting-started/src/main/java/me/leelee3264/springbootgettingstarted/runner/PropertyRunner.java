@@ -1,6 +1,8 @@
 package me.leelee3264.springbootgettingstarted.runner;
 
 import me.leelee3264.springbootgettingstarted.component.MyProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
@@ -25,15 +27,16 @@ public class PropertyRunner implements ApplicationRunner {
     @Autowired
     MyProperties myProperties;
 
+    private final Logger log = LoggerFactory.getLogger(PropertyRunner.class);
 //
 //    @Autowired
 //    private String hello;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        System.out.println("++++++++++++++++++++++ pro ++++++++++++++++++++++++++++");
-        System.out.println("name: {}" + name);
-        System.out.println("++++++++++++++++++++++ pro ++++++++++++++++++++++++++++");
+        log.debug("++++++++++++++++++++++ pro ++++++++++++++++++++++++++++");
+        log.debug("name: {}" + name);
+        log.debug("++++++++++++++++++++++ pro ++++++++++++++++++++++++++++");
 
         System.out.println("\n++++++++++++++++++++++ new pro ++++++++++++++++++++++++++++");
         System.out.println(myProperties.getName());
@@ -42,6 +45,7 @@ public class PropertyRunner implements ApplicationRunner {
 
         System.out.println("++++++++++++++++++++++ pro ++++++++++++++++++++++++++++");
         System.out.println("++++++++++++++++++++++ pro ++++++++++++++++++++++++++++");
-//        System.out.println(hello);
+        System.out.println("code change");
+        System.out.println("code changae3");
     }
 }

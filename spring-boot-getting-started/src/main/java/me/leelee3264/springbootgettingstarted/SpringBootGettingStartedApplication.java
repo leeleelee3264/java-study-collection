@@ -6,7 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 // 루트에 안 두고 사용할 패키지의 최상단 (디폴트)에 어노테이션을 썼다
 // 왜냐하면 componentScan 때문이다.
@@ -234,3 +236,26 @@ public class SpringBootGettingStartedApplication {
 //스프링은 아무튼 SLF4J (심플 로그 파사드 for 자바) 를 쓰고 실제 로그 구현체는 logback을 쓴다고 한다
 //원래는 Commons Loggings 이라는 로그 파사드가 있다는데 문제가 많아서 안 쓰는 레거시라고.
 //로그 파사드는 한마디로 로그 인터페이스들임. 인터페이스를 쓰는 장점인 구현체를 골라 쓸 수 있는 편리함. 그래서 로그 파사드를 쓰면 로거 구현체를 선택할 수 있는데 어차피 로그백 쓴다고 한다.
+
+//
+//로그를 상세하게 커스텀하고 싶으면 logback-spring.xml을 만들어줘야 한다 --> 약간 이렇게 쿼리랑 구분을 하겠네 --> 쉽게 할 것 같음. db 라이브러리에서 나온 애들만 다른 파일에 ㄸ찍어준다고 생각하면 되니까.
+// 근데 나는 디비 로그를 콘솔에도 남기고 파일에도 남기고 싶은데 --> 테스트말고 프로드 환경에서는 분리해도 괜찮을듯
+//구현체가 logback으로 되어있는데 이게 싫으면 log4j2 로 바꿀 수 있다. 라이브러리 제외하고 log4j 추가만 하면 된다
+
+
+
+//#####------------------------- dev tools
+//dev-tool를 넣는 순간 스프링에서 사용하고 있던 캐시를 몇개 꺼버린다.--> 바뀐게 바로바로 보여야 하니까 캐쉬 꺼버리는 것
+//지금 보니까 코드 바꿨을 때 다시 run을 하는 것보다 build를 하는게 훨씬 빠르게 올라간다.
+//뭐 바꾸면 냅다 쉬프트 + f9 갈기지 말고 컨트롤 + f9를 써보자!!
+
+
+
+//################## ------------------- springboot webmvc
+//생각해보면 참 편하게 웹서버를 띄우고 mvc를 이용하고 있는데 이게 어떻게 가능한걸까?
+//저번에 배웠던 auto configure에서 띄우는 팩토리에 webmvc 에 관련된 프리 세팅이 이미 다 되어있다.
+//예를 들어 HiddenHttpMethodFilter는 클라이언트가 보내는 post get 메소드등을 받아서 알맞은 컨트롤러에 전달을 해주고
+//FormContentFilter는 put/delete/patch를 post에서 그러는 것처럼 파라메터를 뺴올 수 있게 해준다.
+//스프링 mvc가 일반 웹 컨벤션에서 확장해서 몇개 부가기능도 들어있음
+//mvc 설정을 내가 좀 추가하고 싶다, 수정하고 싶다 하면 configuration을 만들면 됨.(implements WebMvcConfigurer)
+//근데 만약 여기서 @Configuration 과 @EnableWebMvc 를 같이 사용하면 이전에 스프링 mvc가 지정한 프리셋이 다 날아가고 정말 하나하나 내가 다 세팅을 해줘야 한다.
