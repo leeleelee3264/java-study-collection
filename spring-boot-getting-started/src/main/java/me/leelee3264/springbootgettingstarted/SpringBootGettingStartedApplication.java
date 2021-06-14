@@ -8,6 +8,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 // 루트에 안 두고 사용할 패키지의 최상단 (디폴트)에 어노테이션을 썼다
@@ -259,3 +261,18 @@ public class SpringBootGettingStartedApplication {
 //스프링 mvc가 일반 웹 컨벤션에서 확장해서 몇개 부가기능도 들어있음
 //mvc 설정을 내가 좀 추가하고 싶다, 수정하고 싶다 하면 configuration을 만들면 됨.(implements WebMvcConfigurer)
 //근데 만약 여기서 @Configuration 과 @EnableWebMvc 를 같이 사용하면 이전에 스프링 mvc가 지정한 프리셋이 다 날아가고 정말 하나하나 내가 다 세팅을 해줘야 한다.
+
+
+
+//################## ------------------- httpmessagconverters
+//메세지 컨버터는 무엇인가? 내가 맨날 @RequestBody @ResponseBody 쓰면서 클라이언트에게서 값을 받아오거나 클라이언트에게 값을
+//보내주는데 신기하게도 클래스로 값을 보내고 받아도 스프링이 알아서 변환을 잘 해서 착착 받아온다. --> 여태 아 신기하다 했던게 결국 스프링이 제공해주는 메세지컨버터가 일하고 있었음
+//그래서 정확한 정의는 Http 요청 본문을 객체로 변경하거나, 객체를 Http 응답 본문으로 변경할때 사용이다.
+//그냥 string이나 int 같은 하나의 값을 보낼때는 그냥 string 컨버터가 쓰인다.
+//그리고 값이 여러개인 클래스 같은 애들 경우에는 제일 많이 쓰는 데이터 형태인 제이슨으로 왔다갔다 해서 제이슨 메세지 컨버터가 쓰인다.
+//근데 객체들 다 게터세터 있어야 한다. 자바 규약에 따라서 게터세터를 이용해서 바인딩을 해준다 함
+
+//ContentNegotiationgViewResolver
+//서버가 클라이언트한테 응답을 내보낼때 내보낼 수 있는 타입들을 다 뒤져서 적당한 형태를 찾아 내보낸다.
+//클라이언트가 accept를 명시해뒀으면 그거 보고 찾으면 되니까 쉬운데 항상 그렇게 accept를 써주지는 않음. 아무튼 스프링이 만들어둔 컨텐츠네고티에이팅뷰리졸버가 일을 다 한다.
+//그래서 서버 코딩을 할 때 그냥 별다른 작업 없이 클라이언트가 json으로 응답을 원해도, xml로 응답을 원해도 보내줄 수 있다. (요즘은 당연 다 json으로 한다)
