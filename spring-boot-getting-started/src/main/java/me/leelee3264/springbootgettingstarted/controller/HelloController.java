@@ -42,4 +42,10 @@ public class HelloController {
     ) {
         return 1;
     }
+
+
+    @GetMapping("/hello/page")
+    public String getHelloPage() {
+        return "hello";
+    }
 }

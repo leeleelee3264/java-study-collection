@@ -276,3 +276,10 @@ public class SpringBootGettingStartedApplication {
 //서버가 클라이언트한테 응답을 내보낼때 내보낼 수 있는 타입들을 다 뒤져서 적당한 형태를 찾아 내보낸다.
 //클라이언트가 accept를 명시해뒀으면 그거 보고 찾으면 되니까 쉬운데 항상 그렇게 accept를 써주지는 않음. 아무튼 스프링이 만들어둔 컨텐츠네고티에이팅뷰리졸버가 일을 다 한다.
 //그래서 서버 코딩을 할 때 그냥 별다른 작업 없이 클라이언트가 json으로 응답을 원해도, xml로 응답을 원해도 보내줄 수 있다. (요즘은 당연 다 json으로 한다)
+
+
+//mvc 정적 리소스
+//controller로 뷰를 리턴해주는게 아니라 그냥 쌩으로 static 파일 경로 치고 들어와서 찾아가는 그런 케이스를 말하는 것
+//기본 리소스 위치는 classpath:/static, classpath:/resources 등등 몇개 있는데 기본이 static 아닐지.. 다른데에다 만들어도 static에서 만든게 리턴이 된다. 기본주소 localhost:8080/hello.html 막 이렇게 했을 떄
+//그리고 스프링에서 static 파일이 변경이 없는 경우는 request의 if-modified 항목이랑 response의 last-modificated 로 보고 변
+//변경이 있는지 없는지 조절을 한다. 없으면 304 코드 보내고 실제 리소스는 보내지도 않음
