@@ -81,6 +81,28 @@
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-xml</artifactId>
         </dependency>
+
+
+
+<!--        webjar-->
+<!--        자바스크립트 라이브러리를 아예 스프링에서 자르파일로 관리를 할 수 있다. -->
+<!--        그럼 직접 저장도 안 해도 되고 되게 편하겠다고 생각했는데 생각보다 usage가 엄청 낮다. -->
+<!--        cdn을 써도 되기는 하는데 근데 그럼 버저닝을 직접 다 맙춰줘야 해서 이거 쓰면 좋을 것 같은데...-->
+        <!-- https://mvnrepository.com/artifact/org.webjars.bower/jquery -->
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>jquery</artifactId>
+            <version>3.6.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.webjars/webjars-locator-core -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>webjars-locator-core</artifactId>
+            <version>0.47</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>

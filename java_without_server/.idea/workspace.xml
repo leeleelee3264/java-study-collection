@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e1e3d42-e3ac-4ebd-8bb0-bea9710fa086" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/javaInAction/partTwo/ObjectTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javaInAction/partTwo/EnumTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javaInAction/partTwo/EnumTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,13 +32,13 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../ideaprojects/temp" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../ideaprojects/dnx-touchcare-admin" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="MTCustomThemeConfigurable" />
   </component>
-  <component name="RunManager" selected="Application.ObjectTest">
+  <component name="RunManager" selected="Application.EnumTest">
     <configuration name="DotFour" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="javaInAction.partTwo.chapter5.DotFour" />
       <module name="java_without_server" />
@@ -98,22 +98,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.EnumTest" />
         <item itemvalue="Application.ObjectTest" />
         <item itemvalue="Application.Regex" />
-        <item itemvalue="Application.EnumTest" />
         <item itemvalue="Application.DotSixCaller" />
         <item itemvalue="Application.DotFour" />
       </list>
@@ -139,6 +141,7 @@
       <workItem from="1622006218627" duration="1376000" />
       <workItem from="1622078405617" duration="2317000" />
       <workItem from="1622176314037" duration="1605000" />
+      <workItem from="1623803996151" duration="767000" />
     </task>
     <servers />
   </component>

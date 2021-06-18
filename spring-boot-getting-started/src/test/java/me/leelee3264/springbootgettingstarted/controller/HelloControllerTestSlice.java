@@ -14,9 +14,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * @author SeungminLee
@@ -58,6 +60,23 @@ public class HelloControllerTestSlice {
         assertThat(out.toString())
                 .contains("called")
                 .contains("sout");
+    }
+
+
+    // 타임리프 테스트
+    // 약간이나마 html 테스트를 할 수 있다.
+
+    @Test
+    public void helloT() throws Exception {
+        mockMvc.perform(get("/hello/page"))
+                .andExpect(status().isOk())
+                .andDo(print())
+                // 리턴 받을 뷰 이름
+                .andExpect(view().name("hello"))
+                // 신기했던 거: 모델에 넘기는 어트리뷰트를 여기서 테스트 할 수 있네
+                .andExpect(model().attribute("name", is("seungmin")))
+                // 전체 html에서 지금 seungmin 포함하고 있나 보는 것임. 정말 미미한 테스트..
+                .andExpect(content().string(containsString("seungmin")));
     }
 
 }

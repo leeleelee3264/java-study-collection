@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html >
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -11,7 +11,12 @@
 <body>
 hello from template dir
 
+<!--테스트 해보니까 이렇게 하고 name을 모델로 안 넘기면 그렇다고 에러가 터지는 건 아닌데-->
+<!--디폴트로 써둔 임시방편이 출력되는 것도 아님. 그냥 h1 html이 빈슬롯으로 나옴-->
+<!--그리고 html을 templates에 두는게 타임리프 컨벤션이었네..-->
 
+<!--타임리프 같은 템플릿 엔진들은 이것처럼 뷰를 만들기도 하고 코드를 만들기도 한다고 한다 (mapStaruct의 코드제네레이터 이런걸까?) 몇번 봤던 groovy도ㅓ 템플릿 엔진이라고.-->
+<h1 th:text="${name}">임시방퍈</h1>
 
 </body>
 </html>

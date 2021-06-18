@@ -17,7 +17,12 @@ public class EnumTest {
 
 //        System.out.println(mine.name());
         Map<String, String> t = new HashMap<>();
-        System.out.println(t.get("eee"));
+//        System.out.println(t.get("eee"));
+
+        GEN g = GEN.F;
+        System.out.println(g.same("female"));
+        System.out.println(g.same(GEN.M));
+
     }
 }
 
@@ -37,5 +42,20 @@ enum GEN {
 
     GEN(String s) {
         this.str = s;
+    }
+
+
+    public String getStr() {
+        return str;
+    }
+
+
+    public boolean same(Object obj) {
+
+        if (obj instanceof GEN) {
+            return obj == this;
+        }
+
+        return this.getStr().equals(obj.toString());
     }
 }
