@@ -1,6 +1,7 @@
 package me.leelee3264.springbootgettingstarted.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -32,5 +33,18 @@ public class WebConfig implements WebMvcConfigurer {
                 // 그 파일 관련된 위치는 여기다
                 .addResourceLocations("classpath:/leelee/")
                 .setCachePeriod(20);
+    }
+
+
+
+    // cross origin configuration 으로 편하게 설정하기
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        // 아 내가 원한 형태는 멀티플한 리소스 패스랑 멀티플한 오리진들인데
+//        패쓰에 따라 오리진들 설정을 하나씩 해줄 수는 없고 뭉탱이로 해야 하나봄
+//                얘를 들어 크로스 해야 하는 애들은 프리픽스를 똑같이주고 /api/** 이런 형식으로 와일드 카드로 다 줘버리고
+//     오리진도 그냥 allowOrigins에서 나열임
+        registry.addMapping("/hey")
+                .allowedOrigins("http://localhost:18080", "http://localhost:8081");
     }
 }

@@ -283,3 +283,23 @@ public class SpringBootGettingStartedApplication {
 //기본 리소스 위치는 classpath:/static, classpath:/resources 등등 몇개 있는데 기본이 static 아닐지.. 다른데에다 만들어도 static에서 만든게 리턴이 된다. 기본주소 localhost:8080/hello.html 막 이렇게 했을 떄
 //그리고 스프링에서 static 파일이 변경이 없는 경우는 request의 if-modified 항목이랑 response의 last-modificated 로 보고 변
 //변경이 있는지 없는지 조절을 한다. 없으면 304 코드 보내고 실제 리소스는 보내지도 않음
+
+
+//스프링이 많은 일을 했ㄷ고 스프링 부트가 거기에 살짝 숟가락 얹은 느낌으로 기능 몇개 더 구현핸것.
+//스피링부트의 핵심은 우리가 이런이런 것들을 따로 추가 설정 없이 쓸 수 있다는 것이다 (얘를 들어 Hateoas나 cors 나)
+
+//#------------------------ spring HATEOAS
+//헤이토스라고 하는 건데 현재 리소스에 연관된 링크정보를 클라이언트에게 응답으로 추가 제공하는 것이라고.
+//예를 들어서 내가 book 이라는 정보를 받았으면 book을 사는 buy, 고르는 pick 이런 리퀘스트를 보낼 수 있는 링크를 추가 제공
+//--> 약간 제대로된 restapi는 이래야지! 주장할때 헤이토스도 들어가야지 한다고 함
+//
+//ObjectMapper --> 서버 응답을 json으로 변환해주는 애. 맨날 테스트할 때 주입받아서 쓰는데 얘는 도대체 어디서 임플리먼트가 되었을까? 했는데
+//만들기는 jackson에서 만들어지고 스프링 부트 웹 디펜던시를 넣으면 제공해준다고 한다.
+
+
+//#------------------------- cors (cross origin resource sharing)
+//single-origin policy --> 사실은 오리진에서 또 다른 오리진으로 서로를 호출하는 건 안된다. (서버가 서버를 호출, 진짜 같은 도메인, 같은 포트만 호출이 되고 다른 부분은 다 외부로 취급하는 것 같다)
+//레스트템플릿으로 서버 콜을 하는 방식이 아니라 프론트 화면에서 다른 서버에 리퀘스트 보내서 정보나 자료 가져오는 ajax call에 해당되는 소리인가봄
+//하긴 서버랑 서버 콜은 레스트 템플릿으로 다 되니까.. 아하 클라이언트에서 다른 서버로 콜할때 cors가 필요한거구나
+//오리진: Url 스키마 (http, https) + hostname(api.dnx.kr, localhost) + port (8080, 4000)
+//그래서 이걸 해결하려는 방법이 cross origin resource sharing (오리진들끼리 리소스를 쉐어한다) -> cors 다

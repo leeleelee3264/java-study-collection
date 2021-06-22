@@ -17,4 +17,6 @@ public class HelloController {
     public String getHello() {
         throw new NullPointerException();
     }
+
+
 }
