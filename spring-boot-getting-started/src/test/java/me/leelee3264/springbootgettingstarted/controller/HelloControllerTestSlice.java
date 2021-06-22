@@ -1,5 +1,8 @@
 package me.leelee3264.springbootgettingstarted.controller;
 
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlHeading1;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import me.leelee3264.springbootgettingstarted.service.HelloService;
 import org.junit.Rule;
 import org.junit.Test;
@@ -12,6 +15,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.system.OutputCaptureRule;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.io.IOException;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.hamcrest.Matchers.containsString;
@@ -36,6 +41,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 //서비스, 리파지토리, 컨피규어 아무것도 안 가져오기 때문에 필요하면 다 목빈으로 만들어 줘야 한다.
 @WebMvcTest(HelloController.class)
 public class HelloControllerTestSlice {
+
+    // flux의 webclient가 아니라 htmlunit의 webclient
+    @Autowired
+    WebClient webClient;
+
 
     @Autowired
     MockMvc mockMvc;
@@ -65,7 +75,8 @@ public class HelloControllerTestSlice {
 
     // 타임리프 테스트
     // 약간이나마 html 테스트를 할 수 있다.
-
+    // 더 전문적인 테스트는 html unit을 써야 한다
+    // 써야...할까..? 하긴 눈으로 보고 테스트 하는게 제일 안 좋다고 했음
     @Test
     public void helloT() throws Exception {
         mockMvc.perform(get("/hello/page"))
@@ -79,4 +90,16 @@ public class HelloControllerTestSlice {
                 .andExpect(content().string(containsString("seungmin")));
     }
 
+
+    // html unit
+    // 얘 신기하다. 얘로 테스트하면 console.log에 찍히는게 찍힌다.
+    // html unit 쓰면 템플릿 형태 보느라 화면 켜보는거 빼고는 직접 화면까지 갈 일이 잘 없을듯.
+    @Test
+    public void hello_htmlUnit() throws IOException {
+        HtmlPage page = webClient.getPage("/hello/page");
+        // html 문서의 처음 h1 테그를 가져와라
+        // htmlunit은 이처럼 html의 모든 형태의 테그를 가져오는 것 같움
+        HtmlHeading1 h1 = page.getFirstByXPath("//h1");
+        assertThat(h1.getTextContent()).isEqualToIgnoringCase("seungmin");
+    }
 }
